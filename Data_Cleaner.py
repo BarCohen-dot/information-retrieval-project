@@ -26,8 +26,8 @@ class DataCleaner:
 
     def __init__(self, language='english'):
         self.stop_words = set(stopwords.words(language))  # Load English stopwords
-        self.stemmer = PorterStemmer()  # Initialize stemmer
-        self.tokenizer = WhitespaceTokenizer()  # Use whitespace tokenizer
+        self.stemmer = PorterStemmer()                    # Initialize stemmer
+        self.tokenizer = WhitespaceTokenizer()            # Use whitespace tokenizer
 
     def extract_urls(self, text):
         """Extracts all URLs from text."""
@@ -151,13 +151,13 @@ class DataCleaner:
 # ===================================================== Main ===========================================================
 
 if __name__ == '__main__':  # Run this only when executing the file directly
-    import nltk  # For downloading necessary tokenizers and stopwords
+    import nltk             # For downloading necessary tokenizers and stopwords
     nltk.download('punkt')  # Punkt: tokenizer models used by word_tokenize
     nltk.download('stopwords')  # English stopwords
 
     cleaner = DataCleaner()  # Create instance of cleaner
-    db = DBService(password='Ella3838')  # Connect to the database with password
-    db.connect()  # Establish DB connection
+    db = DBService(password='Your_password')  # Connect to the database with password
+    db.connect()             # Establish DB connection
 
     cleaner.clean_and_store_all_posts(db)  # Clean and update all posts in DB
 
