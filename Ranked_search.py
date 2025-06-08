@@ -1,13 +1,13 @@
 import json  # for reading JSON files
-import os  # for checking file existence
+import os    # for checking file existence
 
 from nltk.stem import PorterStemmer  # for stemming query terms
 from nltk.tokenize import WhitespaceTokenizer
-from nltk.corpus import stopwords  # for removing common stopwords
+from nltk.corpus import stopwords    # for removing common stopwords
 
-import re  # for regex-based cleanup
+import re      # for regex-based cleanup
 import string  # for removing punctuation
-import math  # for improved IDF calculation
+import math    # for improved IDF calculation
 
 # ================================================= introduction ======================================================
 """
@@ -73,9 +73,9 @@ class SearchEngine:
             return []
 
         post_list = self.inverted_index[term]['post_ids']  # list of post IDs where term appears
-        df = self.inverted_index[term]['df']  # document frequency
+        df = self.inverted_index[term]['df']               # document frequency
         total_docs = len(self.post_metadata)
-        idf = math.log(1 + total_docs / df) if df else 0  # improved IDF calculation
+        idf = math.log(1 + total_docs / df) if df else 0   # improved IDF calculation
 
         for PID in post_list:
             post_file = f'data_store/json_posts/post_{PID}.json'
@@ -83,8 +83,8 @@ class SearchEngine:
                 with open(post_file, 'r', encoding='utf-8') as file:
                     freqs = json.load(file)
                 tf = freqs.get(term, 0)  # term frequency in this post
-                tfidf = tf * idf  # basic tf-idf score
-                if self.debug:    # for debugging
+                tfidf = tf * idf         # basic tf-idf score
+                if self.debug:           # for debugging
                     print(f"[DEBUG] Post: {PID} | TF: {tf} | IDF: {idf:.4f} | TF-IDF: {tfidf:.4f}")
                 scores[PID] = scores.get(PID, 0) + tfidf
             else:
@@ -114,7 +114,7 @@ class SearchEngine:
 
 if __name__ == '__main__':
     import nltk
-    nltk.download('punkt')  # download tokenizer
+    nltk.download('punkt')      # download tokenizer
     nltk.download('stopwords')  # download stopword list
 
     engine = SearchEngine()
