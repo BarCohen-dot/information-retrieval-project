@@ -14,7 +14,7 @@ Handles connection, fetching posts, fetching post by ID, and loading SQL scripts
 
 class DBService:
 
-    def __init__(self, host='localhost', user='root', password='Ella3838', database='information_retrieval'):
+    def __init__(self, host='Your_host', user='Your_user', password='Your_password', database='information_retrieval'):
         self.host = host
         self.user = user
         self.password = password
@@ -111,6 +111,7 @@ if __name__ == '__main__':
     db.connect()
 
     # Run SQL script
-    sql_file_path = os.path.join(os.getcwd(), "dataset_2_posts.sql")
+    sql_file_path = os.path.join(os.getcwd(), "dataset_2_posts.sql") # Take Dataset to MySQL
     db.run_sql_script(sql_file_path)
     db.close_connection()
+    
